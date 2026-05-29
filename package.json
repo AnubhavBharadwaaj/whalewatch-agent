@@ -1,0 +1,40 @@
+{
+  "name": "whalewatch-agent",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Autonomous SAP-registered agent: whale movements -> Ace Data Cloud analysis bundle, paid via x402 on Solana.",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "smoke:x402": "tsx src/x402/smoke-test.ts",
+    "smoke:llm": "tsx src/llm/smoke-test.ts",
+    "smoke:media": "tsx src/media/smoke-test.ts",
+    "register": "tsx src/sap/cli.ts",
+    "register:dry": "tsx src/sap/cli.ts --dry-run",
+    "smoke:sap": "tsx src/sap/smoke-test.ts",
+    "smoke:receipt": "tsx src/receipt/smoke-test.ts",
+    "smoke:whale": "tsx src/whale/smoke-test.ts",
+    "smoke:whale-rest": "tsx src/whale/rest-smoke-test.ts",
+    "diag:whale-rest": "tsx src/whale/rest-diagnostic.ts",
+    "smoke:eth-rpc": "tsx src/whale/eth-rpc-smoke-test.ts",
+    "smoke:preflight": "tsx src/preflight/smoke-test.ts",
+    "verify:x402": "tsx src/x402/verify-live.ts"
+  },
+  "dependencies": {
+    "@acedatacloud/x402-client": "^2026.507.2",
+    "@coral-xyz/anchor": "^0.30.1",
+    "@oobe-protocol-labs/synapse-sap-sdk": "0.18.0",
+    "@solana/web3.js": "^1.98.4",
+    "dotenv": "^16.4.7",
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
