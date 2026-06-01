@@ -17,8 +17,8 @@
 
 WhaleWatch is an autonomous agent that watches large cryptocurrency whale movements (via the Whale Alert API), analyzes each event with an LLM, generates an image and video summary, and posts the result. Every Ace Data Cloud API call settles directly on Solana mainnet via x402 — no API keys, no credit accounts, no subsidies. **Each stage call = one verifiable on-chain USDC transfer.**
 
-- **85+ x402 settlements** on Solana mainnet across the build
-- **66 settlements in a single 32-minute load test** of the production stage code paths
+- **233 x402 settlements** on Solana mainnet across the build
+- **144 settlements in a single 107-minute load test** of the production stage code paths
 - **Registered on Synapse SAP** (Solana Agent Protocol) — agent PDA above
 - **Full diagnostic depth**: investigation of Ace Data's two x402 client patterns (pre-submit vs canonical), documented and reported back to the team
 

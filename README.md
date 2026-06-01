@@ -6,8 +6,8 @@ An autonomous agent that detects large cryptocurrency whale movements, analyzes 
 
 ## Headline
 
-- **85+ x402 settlements on Solana mainnet** across the build
-- **66 settlements in a single 32-minute production-code load test**
+- **233 x402 settlements on Solana mainnet** across the build
+- **144 settlements in a single 107-minute production-code load test**
 - Registered on Synapse SAP — agent PDA `9SdK2ihjbbjEKaEEBuiDoyWUhCX6e3n5aKePAZCxH1JJ`
 
 Full details: [`Submission.md`](./Submission.md) · Receipts: [`x402_settlements.md`](./x402_settlements.md)
