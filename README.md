@@ -1,61 +1,96 @@
 # WhaleWatch Agent
 
-Autonomous SAP-registered agent for the OOBE Protocol x Ace Data Cloud bounty
-(Category 2). It converts $10M+ whale movements into a paid LLM-analysis +
-image + video bundle, settling each Ace Data Cloud call over x402 on Solana.
+An autonomous agent that detects large cryptocurrency whale movements, analyzes them with an LLM, generates an image and video summary, and posts the result. Every Ace Data Cloud API call settles directly on Solana mainnet via x402 — no API keys, no credit accounts.
 
-Built in pieces. **In this drop: Piece 1 (trigger), Piece 2a (x402 client),
-Piece 2b (LLM analysis stage).**
+[![Verified on Solscan](https://img.shields.io/badge/verified-on--chain-success)](https://solscan.io/account/FBykJfwmAyFK8mrqh1dgPAARFFCv1agUTGNfex6SDebj)
 
-## Run it
+## Headline
 
-```bash
-npm install
-cp .env.example .env
-npm run smoke:x402   # tests the x402 client dry-run path (hermetic)
-npm run smoke:llm    # tests the LLM analysis stage + JSON parser (hermetic)
-npm start            # runs the agent: trigger -> LLM analysis
+- **85+ x402 settlements on Solana mainnet** across the build
+- **66 settlements in a single 32-minute production-code load test**
+- Registered on Synapse SAP — agent PDA `9SdK2ihjbbjEKaEEBuiDoyWUhCX6e3n5aKePAZCxH1JJ`
+
+Full details: [`Submission.md`](./Submission.md) · Receipts: [`x402_settlements.md`](./x402_settlements.md)
+
+## How it works
+
+```
+Whale Alert  ──┐
+               ▼
+        ┌──────────────┐    ┌─────────────────────────────┐
+        │  agent core  │ ── │ LLM analysis  (gpt-4o-mini) │ ─→ on-chain settlement
+        │              │    └─────────────────────────────┘
+        │              │    ┌─────────────────────────────┐
+        │              │ ── │ Image generation (DALL-E)   │ ─→ on-chain settlement
+        │              │    └─────────────────────────────┘
+        │              │    ┌─────────────────────────────┐
+        │              │ ── │ Video generation            │ ─→ on-chain settlement
+        │              │    └─────────────────────────────┘
+        │              │    ┌─────────────────────────────┐
+        │              │ ── │ Receipt inscription (memo)  │
+        └──────────────┘    └─────────────────────────────┘
+                                          │
+                                          ▼
+                                      Telegram
 ```
 
-Both smoke tests should print `SMOKE TEST PASSED`. They use local mock servers —
-no API key, no wallet, no network, no spend.
+Each Ace Data Cloud call settles a separate USDC payment on Solana mainnet via the [`@acedatacloud/x402-client`](https://www.npmjs.com/package/@acedatacloud/x402-client) package. The wallet builds, signs, and submits the SPL TransferChecked, then retries the request with an `X-Payment` envelope containing the confirmed signature.
 
-`npm start` with the template `.env` runs in **dry-run** on the **mock** whale
-source: it generates whale events and runs each through the LLM stage. In
-dry-run the LLM stage probes the Ace Data endpoint for its 402 price, then
-returns a clearly-marked stub analysis — no USDC moves.
+## Quickstart
 
-## Modes
+```bash
+git clone https://github.com/AnubhavBharadwaaj/whalewatch-agent
+cd whalewatch-agent
+npm install
+cp .env.example .env
+# edit .env — set SOLANA_KEYPAIR_PATH to a funded wallet
+```
 
-`AGENT_MODE` in `.env` is `dry-run` in the template (safe). The code default,
-if unset, is `live` — which signs and settles real USDC and needs a funded
-keypair at `AGENT_KEYPAIR_PATH`. dry-run is always an explicit opt-in.
+### Verify the x402 path with a single paid call (~$0.023 USDC)
 
-## The data-source decision (open, not blocking)
+```bash
+ACE_API_TOKEN="" npm run verify:x402 -- --model flux-dev          # preview only
+ACE_API_TOKEN="" npm run verify:x402 -- --pay --model flux-dev    # settle one payment
+```
 
-Whale Alert's REST API is fully key-gated — no free tier. The `WhaleEventSource`
-interface keeps the provider swappable: `MockWhaleSource` runs now with no key;
-`WhaleAlertSource` is the real adapter, inert until `WHALE_ALERT_API_KEY` is set.
+### Run the production-code load test
 
-## Layout
+```bash
+ACE_API_TOKEN="" npx tsx src/run/x402-load-test.ts 50
+```
+
+Each cycle exercises the same `analyzeWhaleEvent` and `generateImage` functions the live agent uses, producing two real on-chain USDC settlements per cycle. Receipts append to `data/x402-load-test-receipts.jsonl`.
+
+### Regenerate the settlements table
+
+```bash
+python3 scripts/generate_settlements_table.py > x402_settlements.md
+```
+
+### Run the live agent against the Whale Alert feed
+
+```bash
+npm start
+```
+
+Set `AGENT_MODE=live` in `.env` for real settlements, or leave it at `dry-run` to log without spending.
+
+## Project layout
 
 ```
 src/
-  config.ts                 env-driven configuration
-  types.ts                  shared domain types
-  index.ts                  poll loop: trigger -> dedupe -> LLM analysis
-  util/log.ts               timestamped logger
-  whale/                    event sources (interface, mock, Whale Alert)
-  store/idempotency.ts      file-backed dedupe store, atomic writes
-  acedata/endpoints.ts      Ace Data Cloud endpoint paths
-  x402/                     x402 payment client (preview, dry-run, live) + smoke test
-  solana/wallet.ts          loads the agent keypair, builds the wallet adapter
-  llm/                      LLM analysis stage + smoke test
+├── index.ts              # main agent loop — whale event → 3-stage pipeline → publish
+├── x402/                 # x402 client wrapper + verification + smoke tests
+├── llm/analyze.ts        # whale event → structured analysis (stage 1)
+├── media/image.ts        # analysis → image URL (stage 2)
+├── media/video.ts        # analysis → video URL (stage 3)
+├── receipt/              # on-chain memo inscription per cycle
+├── sap/                  # Synapse SAP registration
+├── whale/                # whale event sources (Whale Alert WS, mock, ETH RPC)
+├── probes/               # standalone x402 probes per service & investigation
+└── run/x402-load-test.ts # load test runner that produced the 64 settlements
 ```
 
-## Next pieces
+## License
 
-3. Image + video generation stages (more x402 calls per event).
-4. SAP registration on mainnet (v0.17 SDK + funded wallet).
-5. Memo v2 receipt inscription.
-6. Demo wiring.
+MIT

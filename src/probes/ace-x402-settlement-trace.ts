@@ -17,7 +17,7 @@ import { Connection, PublicKey } from '@solana/web3.js';
 const RPC_URL = process.env.SOLANA_RPC_URL ?? 'https://api.mainnet-beta.solana.com';
 const PAYER_PUBKEY = 'FBykJfwmAyFK8mrqh1dgPAARFFCv1agUTGNfex6SDebj';
 const FACILITATOR = '3SPm6qbgsDkj24MuR8Ss4sH97fziqyCiqFKDyeVU2igq';
-const LOOKBACK_HOURS = 10;
+const LOOKBACK_HOURS = 5;
 const SLEEP_BETWEEN_FETCHES_MS = 800;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
