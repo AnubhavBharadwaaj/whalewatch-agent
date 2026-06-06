@@ -10,9 +10,9 @@ All payments below are real on-chain USDC transfers from the agent wallet on Sol
 
 | Source | Settlements | USDC settled |
 |---|---:|---:|
-| Load test | 213 | $15.053466 |
+| Load test | 222 | $15.710448 |
 | Prior probes + verify + smoke | 20 | $3.347587 |
-| **Total verifiable on-chain** | **233** | **$18.401053** |
+| **Total verifiable on-chain** | **242** | **$19.058035** |
 
 ---
 
@@ -23,17 +23,17 @@ stage functions through synthetic whale events to validate that the live
 x402 path scales. Per-stage error isolation kept settled stages durable
 through Ace Data's intermittent auth-service 500s.
 
-- Settlements landed: **213**
-- Total spent: ~$15.053466 USDC
+- Settlements landed: **222**
+- Total spent: ~$15.710448 USDC
 - Receipts: `data/x402-load-test-receipts.jsonl`
 
 **Breakdown by stage:**
 
 | Stage | Settled | USDC |
 |---|---:|---:|
-| chat | 87 | $8.283705 |
-| image | 75 | $1.428225 |
-| video | 51 | $5.341536 |
+| chat | 90 | $8.569350 |
+| image | 78 | $1.485354 |
+| video | 54 | $5.655744 |
 
 **All settlement signatures:**
 
@@ -43,21 +43,30 @@ through Ace Data's intermittent auth-service 500s.
 | 1 | chat | $0.095215 | [`2omFya2tXvEiSbkH...`](https://solscan.io/tx/2omFya2tXvEiSbkH2K5ynqPK8iA5FZSbdvdZVMSVAd7FGVyPxsGyt9ysJapQPiHksQam3CJreGyi6zWmCWfDSFyz) |
 | 1 | chat | $0.095215 | [`bRV61tfXy24MpEtA...`](https://solscan.io/tx/bRV61tfXy24MpEtAPm1ZCUfx2mfGqVN39GnKpcQDHokGnQ4XqnUrAAgGFu6yt6K4UurhxusdNVpCyssrLayiTW4) |
 | 1 | chat | $0.095215 | [`2Vz7tis5y7FbXDy5...`](https://solscan.io/tx/2Vz7tis5y7FbXDy5npvWYojqUdeAzDVfRZC3wxdRFDEf515ffQ8jd8wkhq6RAuw7dhS2ziECDHbV7HprLWB6SyqK) |
+| 1 | chat | $0.095215 | [`2r9CA2zBvGCy2CBr...`](https://solscan.io/tx/2r9CA2zBvGCy2CBrB8bwtx6BMyKwyEzjB19ANkjgfaQ9S9XzDRyP1GWfaH1rqyidadSyyYQddQARuj4qnAzHJA8d) |
 | 1 | image | $0.019043 | [`588Z1x9YttaCzaoE...`](https://solscan.io/tx/588Z1x9YttaCzaoEP8wtDJ5SYYWH6m3PT1j5dt7MvitcmM6ZMNrGn5hb2Fzz3cWnAhrWfatns9E5ZDa285Qa2DKt) |
 | 1 | image | $0.019043 | [`49XgY8P1zvQy16kp...`](https://solscan.io/tx/49XgY8P1zvQy16kphbUyBKRviSJ1aN2TP5z1XEvxJDBcSvToQ1j7rLKEDVAXKnEfoRuLCcuaDRPACmdiNHvNFtk2) |
 | 1 | image | $0.019043 | [`47kkahTNC5dgVwqa...`](https://solscan.io/tx/47kkahTNC5dgVwqarKungPJUJkeLegfUEGigDZiCM3cjQaZ4SUR9zAs6bnfMXjP8j756LLhgaFpsNojEL9ZSdijQ) |
 | 1 | image | $0.019043 | [`2G9SRSHEjdq4rC4x...`](https://solscan.io/tx/2G9SRSHEjdq4rC4xtfdarjzJyXBs3tfYDonmuQhLPxEZmiVkQFmXEesZJ3KS6H3NHHTzkBHnQZp7Hne88hb8J3JK) |
+| 1 | image | $0.019043 | [`9tzfRqU3Sx49JRC6...`](https://solscan.io/tx/9tzfRqU3Sx49JRC6oT4HK2XpmuHbrbF49v5cZ69QuBFqLGqDAZAC18XUumetZNiWGpKgQGUf72MgTyfDz3wCtB2) |
 | 1 | video | $0.104736 | [`3wzcQChBWTrUYiQt...`](https://solscan.io/tx/3wzcQChBWTrUYiQtfB229neEgQe1bjY34cSvdqWHGVnNhwucrCgoHYkBVDNxFKC9PRmHETNZ2iv7SFXg1p2ubAbY) |
 | 1 | video | $0.104736 | [`5Kxw1YL9bXuN41x6...`](https://solscan.io/tx/5Kxw1YL9bXuN41x6uMiS2q3xTq4wWRYuKpG9PE4ttotagT13WxtoUmta7yFme418ZLPAG4akYuP5hSaJgdmf3J59) |
+| 1 | video | $0.104736 | [`B5oYgQ19qU8z1ZE5...`](https://solscan.io/tx/B5oYgQ19qU8z1ZE53M94Pc49RzZZxzG6BPR6z75iTRTUSBuMrYk4LGTPQLnRKi4sF6c8PUUigriX42nCy7tqrrL) |
 | 2 | chat | $0.095215 | [`3a8GneNGDcikp7TJ...`](https://solscan.io/tx/3a8GneNGDcikp7TJvCr2YNVnQErgUmxhMSbiMjc37KuzZidtRhg93APc2EYCWxphaffi5GRHWJUhPnYZDm8zTiB2) |
 | 2 | chat | $0.095215 | [`4cZtYccRyKZy9Ppw...`](https://solscan.io/tx/4cZtYccRyKZy9PpwvQNVcKzq5S5TD7Hp7vAgxfWjVxEFH9qGX5ffHGh4HsbQwjXxEBqofuLxm3EKee1omuhE6dwf) |
+| 2 | chat | $0.095215 | [`3sm5vN8dVFbfUkne...`](https://solscan.io/tx/3sm5vN8dVFbfUknewTmj5YjTNUVZZkjb36pjxkWHRbsh3MEeyu8MvVHkqvqDuGMCM8YwdeyjTnqCsMZU2A23vgHW) |
 | 2 | image | $0.019043 | [`5pS3ADfXixVh9RD1...`](https://solscan.io/tx/5pS3ADfXixVh9RD1km1P7Bq9cB5EVrmuMiqbdTEeRCednjE7m1qbVWDgzuxbwBv2dptJWQez5F77KciiJG8DR75g) |
 | 2 | image | $0.019043 | [`2VpwYkHmzzrF7ejE...`](https://solscan.io/tx/2VpwYkHmzzrF7ejEWdHc44naymSYumCTq9F2275X4NBxN4F9M4NSMjzt5ML1ZgnNCE8pSg8o4U64guvXcT5Fa1aB) |
+| 2 | image | $0.019043 | [`5xeAx2PSTKwTFYnQ...`](https://solscan.io/tx/5xeAx2PSTKwTFYnQtPG3g5pKHRd1UrMvtYnvnZDtvTKm8DjD7GS8VtMpWxhfGFvvnirK27CZY9UCMceEebPkeReA) |
 | 2 | video | $0.104736 | [`2cKxFg71SvtpPpsg...`](https://solscan.io/tx/2cKxFg71SvtpPpsgc9oQeoM8zqaWRnbFwPQkYnZdm1FtueMWKRSSfJguv4xwu8CbqoNopWp7QuUbJRFnZNdqUCeV) |
+| 2 | video | $0.104736 | [`61APGnfwhhNEEoPL...`](https://solscan.io/tx/61APGnfwhhNEEoPLKwTbXwT8sfudwRaTPpqkAbuAkf2Eu9KN4Cg9Zsj6JPL5zd6mpFjXYDXFuA33QfA45pL1qttf) |
 | 3 | chat | $0.095215 | [`2FTGsSXoe95urEVk...`](https://solscan.io/tx/2FTGsSXoe95urEVkxR1dPDGsAJoq3MfqHi5pJZNegLXvkVXnXf4kHco7NB4FQhc1puH6LiJZJYq7FvGTZraPF27R) |
 | 3 | chat | $0.095215 | [`3SzF6wkn1EcMF3vY...`](https://solscan.io/tx/3SzF6wkn1EcMF3vYP3qvLWAA5X8BwYHR5Wb2yrZD5m7nBxaTmSV46CkCcr9m1WbHK5qr66L7UQNwAJ41GLjGbPn2) |
+| 3 | chat | $0.095215 | [`53auhU9vQomhnWmP...`](https://solscan.io/tx/53auhU9vQomhnWmPM7d1MfVgTZKXaaQGEA76agbPH8M3cDAR7oPQRtBE8TXB1L7ZsPbfAer3GsFXgorMYSVGLkND) |
 | 3 | image | $0.019043 | [`2UkeMZMbP9zcyLof...`](https://solscan.io/tx/2UkeMZMbP9zcyLofGzT2AahUWqB1cJkHY42zcqUikYhiUbae9fcaomjtvZZx3XSA6QXWiWYJxMdpNb6ofrTjwV3K) |
+| 3 | image | $0.019043 | [`VWaFzGm4TQXoAXqv...`](https://solscan.io/tx/VWaFzGm4TQXoAXqv7Ps85i2tYBg8x2JNEynWcEhVNoVYbUK8Ek8jqzRh89K3M1gKDdGUbfm8omitGwJ1ndnnHhY) |
 | 3 | video | $0.104736 | [`4FB6Np4bcZcejnax...`](https://solscan.io/tx/4FB6Np4bcZcejnaxoeeKv1qMwRmxF74WA6PChKVtt1NUPvrZdQZMUdpeAGgR9ocCGR6uhHpYcg3RLPevjAjL9HJ5) |
+| 3 | video | $0.104736 | [`67NZ6uKiHEisdf9e...`](https://solscan.io/tx/67NZ6uKiHEisdf9eY2z5tJeDevdr5n9EVRMGBE1JZAZK5VqgZAad57jp9mBME2ZrbtcYt4vM5Gtye6G17478MKic) |
 | 4 | chat | $0.095215 | [`74terzYQafEw4sgd...`](https://solscan.io/tx/74terzYQafEw4sgdW5LDPjPaZbwitPB8HTJV6SR6RG44MgD6f2GkbEPQryaiz6GoVB8JPu7CFnvLxWkrpa9dzgm) |
 | 4 | chat | $0.095215 | [`257osRs7xJf1TfcE...`](https://solscan.io/tx/257osRs7xJf1TfcEhN9s4vJEbF3tY6Qvc3n4hJYfYXRfu2R9GgaygLD1VZtYbmiLmtUcLWPQFjyyEPSJn4pn6MJZ) |
 | 4 | image | $0.019043 | [`4woiPRVpdCtrnPE7...`](https://solscan.io/tx/4woiPRVpdCtrnPE7ooXgugjy7U6uV5rTvHzYwNJ6gEGfiH3pHgawMN3uidmmVGVMUsNMnhuutpEUYY3v9xBiHduc) |
